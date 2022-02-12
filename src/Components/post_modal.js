@@ -16,12 +16,12 @@ class PostModal extends React.Component{
         axios.get(`${APIROOT}/api/listcompanies`,
         {
           headers: {
-            Cookie: `auth=eyJhbGciOiJIUzI1NiJ9.NjFmZDQyMDBlYjVlY2ViMDI1ZDJjM2Fk.bzGtb8jBAmEl0DjJnzQvvf1RJlv4Z1QjfwO5loKm0ec`,
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.NjFmZDQyMDBlYjVlY2ViMDI1ZDJjM2Fk.bzGtb8jBAmEl0DjJnzQvvf1RJlv4Z1QjfwO5loKm0ec`,
+            // Cookie: `auth=${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }).then(res => {
             this.setState({
-                companies : res.data.companies
+                companies : res.data
             })
         })
       }
@@ -43,8 +43,8 @@ class PostModal extends React.Component{
             },
             {
               headers: {
-                Cookie: `auth=eyJhbGciOiJIUzI1NiJ9.NjFmZDQyMDBlYjVlY2ViMDI1ZDJjM2Fk.bzGtb8jBAmEl0DjJnzQvvf1RJlv4Z1QjfwO5loKm0ec`,
-                Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.NjFmZDQyMDBlYjVlY2ViMDI1ZDJjM2Fk.bzGtb8jBAmEl0DjJnzQvvf1RJlv4Z1QjfwO5loKm0ec`,
+                // Cookie: `auth=${localStorage.getItem('token')}`,
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
               },
             }).then(res => {
                 console.log(res)

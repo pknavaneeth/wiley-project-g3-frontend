@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 // import Home from "./Components/home";
-import Login from "./app";
+import Login from "./screens/Dashboard/Dashboard";
 
 export default class Router extends Component {
   render() {

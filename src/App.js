@@ -1,136 +1,38 @@
-import React from "react";
-import axios from "axios";
-import {APIROOT} from './config.js'
-import PostModal from './Components/post_modal'
-class juniorDashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { questions: [], noOfPages: 0, currentPage: 1 , user : {}, isModalShown : false};
-  }
+ 
+import './App.css';
+import Login from "./screens/Login";
+import SignUp from "./screens/SignUp";
+import { createBrowserHistory } from 'history';
+import JuniorDashboard from './screens/Dashboard/Junior';
+import OtherDashboard from './screens/Dashboard/Other';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 
-  fetchQuestions = () => {
-    axios
-    .get( 
-        "https://wiley-grp3-backend.herokuapp.com/api/get-question-answers?showAll=true&sortBy=createdAt&sortOrder=des&pageNo=1&perPage=10",
-        {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.NjFmZDQyMDBlYjVlY2ViMDI1ZDJjM2Fk.bzGtb8jBAmEl0DjJnzQvvf1RJlv4Z1QjfwO5loKm0ec`,
-          },
-        }
-    )
-    .then((res) => {
-      console.log(res);
-      this.setState({ questions: res.data.questions });
-    });
-  }
+const history = createBrowserHistory();
 
-  onLogoutClick = () => {
-    axios
-      .get( 
-          `${APIROOT}/api/logout`,
-          {
-            headers: {
-              Cookie: `auth=eyJhbGciOiJIUzI1NiJ9.NjFmZDQyMDBlYjVlY2ViMDI1ZDJjM2Fk.bzGtb8jBAmEl0DjJnzQvvf1RJlv4Z1QjfwO5loKm0ec`,
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.NjFmZDQyMDBlYjVlY2ViMDI1ZDJjM2Fk.bzGtb8jBAmEl0DjJnzQvvf1RJlv4Z1QjfwO5loKm0ec`,
-            },
-          }
-      )
-  }
-  componentDidMount() {
-
- axios
-      .get( 
-          `${APIROOT}/api/profile`,
-          {
-            headers: {
-              Cookie: `auth=eyJhbGciOiJIUzI1NiJ9.NjFmZDQyMDBlYjVlY2ViMDI1ZDJjM2Fk.bzGtb8jBAmEl0DjJnzQvvf1RJlv4Z1QjfwO5loKm0ec`,
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.NjFmZDQyMDBlYjVlY2ViMDI1ZDJjM2Fk.bzGtb8jBAmEl0DjJnzQvvf1RJlv4Z1QjfwO5loKm0ec`,
-            },
-          }
-      )
-      .then((res) => {
-        console.log(res);
-        this.setState({ user: res.data});
-      }); 
-    this.fetchQuestions()
-  }
-
-  togglePopUp = () => {
-    this.setState({
-      isModalShown : !this.state.isModalShown
-    })
-  }
-
-  render() {
-    return (
-      <div>
-        {
-          this.state.isModalShown 
-            ? <PostModal fetchQuestions={() => this.fetchQuestions()} togglePopUp={() => this.togglePopUp()}/>
-            : <></>
-        }
-      <div className="card" style={{ background: "yellow" }}>
-        
-        <div className="header-row">
-          <div></div>
-        <h3 align="center">Question and Answers</h3>
-        <div className="row-column">
-        <h3>{this.state.user.name}</h3>
-        <h4>{this.state.user.role}</h4>
-        <button onClick={this.onLogoutClick} >LOGOUT</button>
-        </div>
-       
-        </div>
-        
-        <button onClick={this.togglePopUp} className="post-btn">POST QUESTION</button>
-        <ol>
-          {this.state.questions.map((question, index) => {
-            return (
-              <div className="card-body">
-                <li>
-                  <div className="row">
-                    <div className="col">
-                      {question.question}
-                      <div className="col">
-                        Company Name: {question.companyName}
-                      </div>
-                      <div className="col">
-                        Raised By :
-                        {" " +
-                          question.raisedBy.firstname +
-                          " " +
-                          question.raisedBy.lastname}
-                      </div>
-                    </div>
-                    <div className="card-body">
-                      <ol type="a">
-                        {question.answers.map((answer, i) => {
-                          return (
-                            <div className="col">
-                              <li>
-                                <div className="col">{answer.answer}</div>
-                                <div className="col">
-                                  Replayed By :{" "}
-                                  {answer.authorId.firstname +
-                                    " " +
-                                    answer.authorId.lastname}
-                                </div>
-                              </li>
-                            </div>
-                          );
-                        })}
-                      </ol>
-                    </div>
-                  </div>
-                </li>
-              </div>
-            );
-          })}
-        </ol>
-      </div>
-      </div>
-    );
-  }
+export default function App() {
+  return (
+    <Router history={history}>
+      <Switch>
+        <Route exact path="/">
+          <Login  history={history}/>
+        </Route> 
+        <Route path="/signup">
+          <SignUp  history={history}/>
+        </Route>
+        <Route path="/junior">
+          <JuniorDashboard  history={history}/>
+        </Route>
+        <Route path="/other">
+          <OtherDashboard />
+        </Route>
+      </Switch>
+    </Router>
+  );
 }
 
-export default juniorDashboard;
+//export default App;
