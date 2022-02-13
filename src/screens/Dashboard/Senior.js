@@ -1,9 +1,9 @@
 import React from "react";
 import axios from "axios";
-import PostModal from "../../Components/post_modal";
+import PostAnswer from "../../Components/post_answer";
 import { Redirect, NavLink } from "react-router-dom";
 import { APIROOT } from "../../config.js";
-class juniorDashboard extends React.Component {
+class seniorDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,6 +12,7 @@ class juniorDashboard extends React.Component {
       currentPage: 1,
       user: {},
       isModalShown: false,
+      questionId: {},
     };
   }
 
@@ -19,7 +20,7 @@ class juniorDashboard extends React.Component {
     axios
       .get(
         APIROOT +
-          "/api/get-question-answers?showAll=true&sortBy=createdAt&sortOrder=des&pageNo=1&perPage=100",
+          "/api/senior/view-questions?sortBy=createdAt&sortOrder=desc&pageNo=1&perPage=100",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -60,10 +61,15 @@ class juniorDashboard extends React.Component {
     this.fetchQuestions();
   }
 
-  togglePopUp = () => {
+  togglePopUp = (event) => {
+    if (event) console.log(event.target.value);
     this.setState({
       isModalShown: !this.state.isModalShown,
     });
+    if (event)
+      this.setState({
+        questionId: JSON.parse(event.target.value),
+      });
   };
 
   render() {
@@ -73,9 +79,10 @@ class juniorDashboard extends React.Component {
     return (
       <div>
         {this.state.isModalShown ? (
-          <PostModal
+          <PostAnswer
             fetchQuestions={() => this.fetchQuestions()}
             togglePopUp={() => this.togglePopUp()}
+            question={this.state.questionId}
           />
         ) : (
           <></>
@@ -83,7 +90,7 @@ class juniorDashboard extends React.Component {
         <div className="card" style={{ background: "yellow" }}>
           <div className="header-row">
             <div></div>
-            <h3 align="center">Junior Dashboard</h3>
+            <h3 align="center">Senior Dashboard</h3>
             <div className="row-column">
               <h3>{this.state.user.name}</h3>
               <h4>{this.state.user.role}</h4>
@@ -91,14 +98,11 @@ class juniorDashboard extends React.Component {
             </div>
           </div>
 
-          <button onClick={this.togglePopUp} className="post-btn">
-            POST QUESTION
-          </button>
           <ol>
             {this.state.questions.map((question, index) => {
               return (
                 <div className="card-body">
-                  <li>
+                  <li key={index}>
                     <div className="row">
                       <div className="col">
                         {question.question}
@@ -112,19 +116,34 @@ class juniorDashboard extends React.Component {
                             " " +
                             question.raisedBy.lastname}
                         </div>
+                        <button
+                          value={JSON.stringify({
+                            id: question._id,
+                            question: question.question,
+                          })}
+                          onClick={this.togglePopUp}
+                          className="btn btn-primary btn-sm"
+                        >
+                          REPLY
+                        </button>
                       </div>
                       <div className="card-body">
                         <ol type="a">
                           {question.answers.map((answer, i) => {
                             return (
                               <div className="col">
-                                <li>
+                                <li key={i}>
                                   <div className="col">{answer.answer}</div>
                                   <div className="col">
-                                    Replyed By :{" "}
-                                    {answer.authorId.firstname +
-                                      " " +
-                                      answer.authorId.lastname}
+                                    <div className="row">
+                                      Replyed By :
+                                      {answer.authorId.firstname +
+                                        " " +
+                                        answer.authorId.lastname}
+                                    </div>
+                                    <div className="row">
+                                      Status : {answer.status}
+                                    </div>
                                   </div>
                                 </li>
                               </div>
@@ -144,4 +163,4 @@ class juniorDashboard extends React.Component {
   }
 }
 
-export default juniorDashboard;
+export default seniorDashboard;
