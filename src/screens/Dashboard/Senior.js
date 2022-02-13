@@ -43,7 +43,6 @@ class seniorDashboard extends React.Component {
       })
       .then((res) => {
         console.log(res);
-
         window.open("/", "_self");
       });
   };
@@ -94,6 +93,7 @@ class seniorDashboard extends React.Component {
             <div className="row-column">
               <h3>{this.state.user.name}</h3>
               <h4>{this.state.user.role}</h4>
+              <h4>{this.state.user.companyName}</h4>
               <button onClick={this.onLogoutClick}>LOGOUT</button>
             </div>
           </div>
