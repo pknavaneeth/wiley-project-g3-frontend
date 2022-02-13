@@ -6,6 +6,7 @@ import JuniorDashboard from "./screens/Dashboard/Junior";
 import OtherDashboard from "./screens/Dashboard/Other";
 import SeniorDashboard from "./screens/Dashboard/Senior";
 import PODashboard from "./screens/Dashboard/PO";
+import LecturerDashboard from "./screens/Dashboard/Lecturer";
 import {
   BrowserRouter as Router,
   Switch,
@@ -34,8 +35,8 @@ export default function App() {
         <Route path="/po">
           <PODashboard history={history} />
         </Route>
-        <Route path="/other">
-          <OtherDashboard />
+        <Route path="/lecturer">
+          <LecturerDashboard history={history} />
         </Route>
       </Switch>
     </Router>
