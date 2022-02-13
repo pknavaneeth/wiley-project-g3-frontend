@@ -1,0 +1,65 @@
+.form-inner {
+  text-align: center;
+  margin: 2px;
+  font-size: 25px;
+}
+.row-column{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.header-row{
+  display: flex;
+  justify-content: space-between; 
+
+}
+.card{
+  padding: 20px;
+  position: relative;
+  min-height: 100vh;
+}
+.modal-back{
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.516);
+  position: absolute;
+  display: flex;
+  z-index: 1111;
+  align-items: center;
+  justify-content: center;
+}
+select, textarea{
+  background-color: white;
+  border-radius: 8;
+  margin: 10px 0;
+  padding: 10px;
+  width: 400px;
+}
+.post-modal{
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+}
+.form-group{
+  display: flex;
+  flex-direction: column;
+}
+.post-btn{
+  width: 200px;
+  padding: 10px 15px;
+  /* color: yellow;
+  background-color: white; */
+}
+.post_button{
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.close-btn{
+  font-weight: 900;
+  color: black;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}

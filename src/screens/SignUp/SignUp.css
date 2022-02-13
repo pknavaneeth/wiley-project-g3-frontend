@@ -1,0 +1,159 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+   
+  * {
+    box-sizing: border-box;
+  }
+   
+  /* style the container */
+  .signup-page .container {
+    width: 30% !; 
+    position: relative;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px 100px 30px 100px;
+  }
+
+  .signup-page .mycontainer {
+    width: 35% ; 
+   position: relative;
+   border-radius: 10px;
+   background-color: #f2f2f2;
+   padding: 20px 30px 30px 30px; 
+   position: absolute;
+   left: 32.5%;
+   top: 10%;
+ }
+   
+  /* style inputs and link buttons */
+  .signup-page input,
+  .signup-page .btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    margin: 5px !important;
+    opacity: 0.85;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 20px;
+    text-decoration: none; /* remove underline from anchors */
+  }
+   
+  .signup-page input:hover,
+  .signup-page .btn:hover {
+    opacity: 1;
+  }
+   
+  /* add appropriate colors to fb, twitter and google buttons */
+  .signup-page .fb {
+    background-color: #3b5998;
+    color: white;
+  }
+   
+  .signup-page .twitter {
+    background-color: #55acee;
+    color: white;
+  }
+   
+  .signup-page .google {
+    background-color: #dd4b39;
+    color: white;
+  }
+   
+  /* style the submit button */
+  .signup-page input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+  }
+   
+  .signup-page input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  .signup-page h1 {
+    margin-left: 30px;
+  }
+  .signup-page p {
+    text-align: center;
+  }
+  /* Two-column layout */
+  .signup-page .col {
+    float: left;
+    width: 50%;
+    margin: auto;
+    padding: 0 50px;
+    margin-top: 6px;
+  }
+   
+  /* Clear floats after the columns */
+  .signup-page .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+   
+  /* vertical line */
+  .signup-page .vl {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    border: 2px solid #ddd;
+    height: 175px;
+  }
+   
+  /* text inside the vertical line */
+  .signup-page .vl-innertext {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    padding: 8px 10px;
+  }
+   
+  /* hide some text on medium and large screens */
+  .signup-page .hide-md-lg {
+    display: none;
+  }
+   
+  /* bottom container */
+  .signup-page .bottom-container {
+    text-align: center;
+    background-color: #666;
+    border-radius: 0px 0px 4px 4px;
+  }
+   
+  /* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+ @media screen and (max-width: 650px) {
+    .signup-page .col {
+      width: 100%;
+      margin-top: 0;
+    }
+    /* hide the vertical line */
+    .signup-page .vl {
+      display: none;
+    }
+    /* show the hidden text on small screens */
+    .signup-page .hide-md-lg {
+      display: block;
+      text-align: center;
+    }
+  }
+
+  .signup-page #user_role{
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+     margin: 5px 0; 
+    opacity: 0.85;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 20px;
+    text-decoration: none;
+  }
+
+  
