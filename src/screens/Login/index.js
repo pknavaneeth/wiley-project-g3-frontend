@@ -39,6 +39,9 @@ class Login extends Component {
           localStorage.setItem("token", res.data.token);
           if (res.data.role == "Junior") window.open("/junior", "_self");
           else if (res.data.role == "Senior") window.open("/senior", "_self");
+          else if (res.data.role == "PO") window.open("/po", "_self");
+          else if (res.data.role == "Lecturer")
+            window.open("/lecturer", "_self");
           else window.open("/other", "_self");
         }
       });
