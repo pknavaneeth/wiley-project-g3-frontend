@@ -5,6 +5,7 @@ import { createBrowserHistory } from "history";
 import JuniorDashboard from "./screens/Dashboard/Junior";
 import OtherDashboard from "./screens/Dashboard/Other";
 import SeniorDashboard from "./screens/Dashboard/Senior";
+import PODashboard from "./screens/Dashboard/PO";
 import {
   BrowserRouter as Router,
   Switch,
@@ -29,6 +30,9 @@ export default function App() {
         </Route>
         <Route path="/senior">
           <SeniorDashboard history={history} />
+        </Route>
+        <Route path="/po">
+          <PODashboard history={history} />
         </Route>
         <Route path="/other">
           <OtherDashboard />
